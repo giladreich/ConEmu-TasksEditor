@@ -19,7 +19,7 @@ namespace ConEmu.TasksEditor.Views
         private void EditTaskWindow_Load(object sender, EventArgs e)
         {
             tbxName.Text = task.Name;
-            foreach (Command command in task.Commands)
+            foreach (Command command in task)
             {
                 string cmdString = command.CommandString;
                 string[] commands = Regex.Split(cmdString, "&&");

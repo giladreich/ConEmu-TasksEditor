@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace ConEmu.TasksEditor.Models
@@ -16,7 +17,7 @@ const CETASKFLAGS
 	CETF_DONT_CHANGE    = 0x80000000,
 	CETF_NONE           = 0;
      */
-    public sealed class ConEmuTask : IEquatable<ConEmuTask>
+    public sealed class ConEmuTask : IEquatable<ConEmuTask>, IEnumerable<Command>
     {
         public Guid Guid { get; private set; }
         public string Name { get; set; }
@@ -61,7 +62,12 @@ const CETASKFLAGS
             Commands.Remove(command);
         }
 
-        public IEnumerator<string> GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public IEnumerator<Command> GetEnumerator()
         {
             foreach (Command command in Commands)
             {
