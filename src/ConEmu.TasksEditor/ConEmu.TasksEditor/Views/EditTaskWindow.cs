@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ConEmu.TasksEditor.Models;
+using ConEmu.TasksEditor.Utils;
 using CloseReason = ConEmu.TasksEditor.Enums.CloseReason;
 
 namespace ConEmu.TasksEditor.Views
@@ -19,23 +20,22 @@ namespace ConEmu.TasksEditor.Views
         private void EditTaskWindow_Load(object sender, EventArgs e)
         {
             tbxName.Text = task.Name;
+            tbxGuiArgs.Text = task.GuiArgs;
+
             foreach (Command command in task)
             {
-                string cmdString = command.CommandString;
-                string[] commands = Regex.Split(cmdString, "&&");
-                foreach (string cmd in commands)
-                {
-                    Console.WriteLine(cmd);
-                    rtbCommands.AppendText(cmd.Trim() + Environment.NewLine);
-                }
+                string[] commands = Regex.Split(command, "&&");
+                commands.ForEach(c => rtbCommands.AppendText(c.Trim() + Environment.NewLine));
             }
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            ConEmuTask clonedTask = task.Clone();
-            clonedTask.Name = tbxName.Text;
-            clonedTask.Commands.Clear();
+            ConEmuTask modifiedTask = task.Clone();
+            modifiedTask.Name = tbxName.Text;
+            modifiedTask.GuiArgs = tbxGuiArgs.Text;
+
+            modifiedTask.Commands.Clear();
             string[] lines = rtbCommands.Lines;
             string tmpCmd = String.Empty;
             foreach (string line in lines)
@@ -45,9 +45,9 @@ namespace ConEmu.TasksEditor.Views
             }
 
             string cmd = tmpCmd.Remove(tmpCmd.Length - 4, 4);
-            clonedTask.Commands.Add(new Command(cmd));
+            modifiedTask.Commands.Add(new Command(cmd));
 
-            ((MainWindow)Owner).OnChildClosed(this, new ConEmuArgs(CloseReason.Save, clonedTask));
+            ((MainWindow)Owner).OnChildClosed(this, new ConEmuArgs(CloseReason.Save, modifiedTask));
             Close();
         }
 

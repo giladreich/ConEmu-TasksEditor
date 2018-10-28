@@ -52,48 +52,6 @@ namespace ConEmu.TasksEditor.Views.Presenters
             view.BringToFront();
         }
 
-        public void UpdateConEmuConfPath()
-        {
-            string cmderPath = GetProcPath("cmder.exe");
-            if (cmderPath != null)
-            {
-                string dir = Path.GetDirectoryName(cmderPath);
-                Debug.Assert(dir != null, nameof(dir) + " != null");
-                string path = Path.Combine(dir, "vendor\\conemu-maximus5", "ConEmu.xml");
-                view.ConEmuXmlPath = path;
-            }
-            else
-            {
-                string conEmuPath = GetProcPath("conemu.exe");
-                if (conEmuPath == null) return;
-
-                string dir = Path.GetDirectoryName(conEmuPath);
-                Debug.Assert(dir != null, nameof(dir) + " != null");
-                string path = Path.Combine(dir, "ConEmu.xml");
-                view.ConEmuXmlPath = path;
-            }
-        }
-
-        public string GetProcPath(string program)
-        {
-            ProcessStartInfo si = new ProcessStartInfo
-            {
-                FileName = "where.exe",
-                Arguments = program,
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-
-            Process proc = new Process { StartInfo = si };
-
-            proc.Start();
-            string result = proc.StandardOutput.ReadLine();
-            proc.Close();
-
-            return result;
-        }
-
         private void UpdateTask(ConEmuTask task, XmlDocument doc, ConEmuTask newTask)
         {
             XmlNodeList tasksNode = doc.SelectNodes("//key[@name='Tasks']/key");
@@ -174,6 +132,48 @@ namespace ConEmu.TasksEditor.Views.Presenters
             keyElem.AppendChild(elem7);
 
             return keyElem;
+        }
+
+        public void UpdateConEmuConfPath()
+        {
+            string cmderPath = GetProcPath("cmder.exe");
+            if (cmderPath != null)
+            {
+                string dir = Path.GetDirectoryName(cmderPath);
+                Debug.Assert(dir != null, nameof(dir) + " != null");
+                string path = Path.Combine(dir, "vendor\\conemu-maximus5", "ConEmu.xml");
+                view.ConEmuXmlPath = path;
+            }
+            else
+            {
+                string conEmuPath = GetProcPath("conemu.exe");
+                if (conEmuPath == null) return;
+
+                string dir = Path.GetDirectoryName(conEmuPath);
+                Debug.Assert(dir != null, nameof(dir) + " != null");
+                string path = Path.Combine(dir, "ConEmu.xml");
+                view.ConEmuXmlPath = path;
+            }
+        }
+
+        public string GetProcPath(string program)
+        {
+            ProcessStartInfo si = new ProcessStartInfo
+            {
+                FileName = "where.exe",
+                Arguments = program,
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            Process proc = new Process { StartInfo = si };
+
+            proc.Start();
+            string result = proc.StandardOutput.ReadLine();
+            proc.Close();
+
+            return result;
         }
 
         public void LoadConEmuXmlFile(string path)

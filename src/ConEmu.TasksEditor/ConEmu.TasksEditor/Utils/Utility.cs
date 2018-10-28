@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml;
@@ -7,9 +8,9 @@ namespace ConEmu.TasksEditor.Utils
 {
     public static class Utility
     {
-        public static IEnumerable<XmlNode> Where(this XmlNode src, Func<XmlNode, bool> predicate)
+        public static IEnumerable<T> Where<T>(this T src, Func<T, bool> predicate)
         {
-            List<XmlNode> list = new List<XmlNode>();
+            List<T> list = new List<T>();
             src.ForEach(n =>
             {
                 if (predicate.Invoke(n))
@@ -19,10 +20,17 @@ namespace ConEmu.TasksEditor.Utils
             return list;
         }
 
-        public static void ForEach(this XmlNode src, Action<XmlNode> action)
+        public static void ForEach<T>(this T src, Action<T> action)
         {
-            foreach (XmlNode child in src)
-                action.Invoke(child);
+            IEnumerable collection = (IEnumerable) src;
+            foreach (T itr in collection)
+                action.Invoke(itr);
+        }
+
+        public static void ForEach<T>(this T[] src, Action<T> action)
+        {
+            foreach (T itr in src)
+                action.Invoke(itr);
         }
 
         public static int ToInt32(this string src)
