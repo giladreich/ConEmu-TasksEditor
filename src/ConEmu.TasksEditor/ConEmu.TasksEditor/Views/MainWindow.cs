@@ -67,6 +67,11 @@ namespace ConEmu.TasksEditor.Views
             presenter.LoadConEmuXmlFile(tbxConXML.Text);
         }
 
+        private void BtnClone_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void BtnAdd_Click(object sender, EventArgs e)
         {
 

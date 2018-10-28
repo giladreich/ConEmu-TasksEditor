@@ -78,6 +78,9 @@
     <EmbeddedResource Include="Views\EditTaskWindow.resx">
       <DependentUpon>EditTaskWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
