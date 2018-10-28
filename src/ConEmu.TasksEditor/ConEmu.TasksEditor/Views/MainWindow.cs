@@ -30,6 +30,11 @@ namespace ConEmu.TasksEditor.Views
         public void OnChildClosed(object sender, ConEmuArgs e)
         {
             ChildClosed?.Invoke(sender, e);
+            foreach (ConEmuTask task in lbxTasks.Items)
+            {
+                if (task.Guid == e.Task.Guid)
+                    lbxTasks.SelectedItem = task;
+            }
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
