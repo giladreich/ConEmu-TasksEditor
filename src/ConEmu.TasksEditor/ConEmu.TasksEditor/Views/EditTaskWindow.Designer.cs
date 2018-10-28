@@ -40,7 +40,7 @@
             // 
             // tbxName
             // 
-            this.tbxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tbxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxName.Location = new System.Drawing.Point(102, 12);
             this.tbxName.Name = "tbxName";
@@ -49,8 +49,8 @@
             // 
             // rtbCommands
             // 
-            this.rtbCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.rtbCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbCommands.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbCommands.Location = new System.Drawing.Point(33, 104);
@@ -110,7 +110,7 @@
             // 
             // tbxGuiArgs
             // 
-            this.tbxGuiArgs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tbxGuiArgs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxGuiArgs.Location = new System.Drawing.Point(34, 56);
             this.tbxGuiArgs.Name = "tbxGuiArgs";
@@ -130,10 +130,12 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rtbCommands);
             this.Controls.Add(this.tbxName);
+            this.KeyPreview = true;
             this.Name = "EditTaskWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Task";
             this.Load += new System.EventHandler(this.EditTaskWindow_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EditTaskWindow_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 

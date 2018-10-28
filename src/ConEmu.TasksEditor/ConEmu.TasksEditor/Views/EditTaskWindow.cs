@@ -56,5 +56,16 @@ namespace ConEmu.TasksEditor.Views
             ((MainWindow)Owner).OnChildClosed(this, new ConEmuArgs(CloseReason.Cancel, task));
             Close();
         }
+
+        private void EditTaskWindow_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Keys pressedKey = (Keys) e.KeyChar;
+            switch (pressedKey)
+            {
+                case Keys.Escape:
+                    btnCancel.PerformClick();
+                    break;
+            }
+        }
     }
 }
